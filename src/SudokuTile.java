@@ -50,4 +50,8 @@ public class SudokuTile {
         return "Potential Values are: " + potentialValues.toString();
     }
 
+    ArrayList<Integer> getPotentialValues(){
+        return potentialValues;
+    }
+
 }

@@ -2,6 +2,7 @@ public class Main {
 
     public static void main(String[] args) {
         SudokuBoard board = new SudokuBoard();
+
         int[][] hardPuzzle = {
                 {0, 1, 5},
                 {0, 3, 2},
@@ -129,12 +130,19 @@ public class Main {
                 {8, 8, 6}
         };
 
-        for(int[] i : hardPuzzle) {
+        int[][] blankPuzzle = {
+
+        };
+
+        for(int[] i : easyPuzzle) {
             board.setValue(i[2], i[0], i[1]);
         }
 
         System.out.println(board.toString());
         System.out.println(board.prettyOutput());
         System.out.println(board.isSolved() ? "Board Solved" : "Board Unsolved");
+        board = board.recursivelySolve();
+        System.out.println(board.toString());
+        System.out.println(board.prettyOutput());
     }
 }

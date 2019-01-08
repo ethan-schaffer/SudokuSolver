@@ -78,4 +78,36 @@ public class SudokuBoard {
         }
         return stringBuilder.toString();
     }
+
+    SudokuBoard copyBoard() {
+        SudokuBoard board = new SudokuBoard();
+        for (int row : new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8}) {
+            for (int col : new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8}) {
+                board.setValue(tiles[row][col].getValue(), row, col);
+            }
+        }
+        return board;
+    }
+
+    public SudokuBoard recursivelySolve(){
+        if(isSolved()) {
+            return this;
+        }
+        for (int row : new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8}) {
+            for (int col : new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8}) {
+                if(tiles[row][col].getValue() == 0) {
+                    for(int value : tiles[row][col].getPotentialValues()) {
+                        SudokuBoard copy = copyBoard();
+                        copy.setValue(value, row, col);
+                        if(copy.isSolved()) {
+                            System.out.println(copy.prettyOutput());
+                            return copy;
+                        }
+                        copy.recursivelySolve();
+                    }
+                }
+            }
+        }
+        return this;
+    }
 }
